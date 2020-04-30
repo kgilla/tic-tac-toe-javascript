@@ -2,7 +2,11 @@ const player = (name, symbol) => {
   return { name, symbol };
 };
 
+const p1 = Object.create(player("KEN", "X"));
+const p2 = Object.create(player("JULIA", "O"));
+
 const gameBoard = (() => {
+  
   let gameState = ["", "", "", "", "", "", "", "", ""];
 
   const boardSpots = document.querySelectorAll(".board-spot");
@@ -18,8 +22,7 @@ const gameBoard = (() => {
   }
 
   function addMove(move) {
-    sym = game.currentTurn == 0 ? p1.symbol : p2.symbol;
-    gameState[move] = sym;
+    gameState[move] = game.currentTurn.symbol;
     game.checkWin()
     render()
     game.currentTurn = game.turnSwitch(game.currentTurn);
@@ -31,38 +34,49 @@ const gameBoard = (() => {
     });
   }
 
-  return {
-    gameState, addMove
-  };
+  return {gameState, addMove, boardSpots};
+
 })();
 
-
-
 const game = (() => {
+  
   const randomTurn = () => {
     let turn = Math.floor(Math.random() * 2);
-    return turn
+    return turn == 0 ? p1 : p2;
   }
 
   function turnSwitch(turn) {
-    return turn == 0 ? 1 : 0;
+    turnCount == 9 ? tie() : turnCount++;
+    return turn == p1 ? p2 : p1;
   }
 
   function checkWin() {
-    sym = game.currentTurn == 0 ? p1.symbol : p2.symbol;
     winCombos.forEach(combo => {
       let counter = 0;
       combo.forEach(index => {
-        if (gameBoard.gameState[index] == sym) {
+        if (gameBoard.gameState[index] == currentTurn.symbol) {
           counter++;
-          if (counter == 3) {
-            console.log("winner");
-          } 
+          if (counter == 3) win(combo); 
         } 
       });
     });
   }
 
+  function win(combo) {
+    combo.forEach(i => {
+      gameBoard.boardSpots[i].classList.toggle("green");
+    })
+  }
+
+  function lose() {
+    console.log("loser");
+  }
+
+  function tie() {
+    console.log("tie");
+  }
+
+  let turnCount = 1;
   let currentTurn = randomTurn();
 
   const winCombos = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],
@@ -71,5 +85,3 @@ const game = (() => {
   return {currentTurn, turnSwitch, checkWin};
 })();
 
-const p1 = Object.create(player("KEN", "X"));
-const p2 = Object.create(player("JULIA", "O"));

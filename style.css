@@ -1,10 +1,27 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+
+body {
+  margin: 0;
+}
+
+h1 {
+  margin: 0;
+  padding: 1%;
+  background: #333;
+  color: #fff;
+  border-bottom: solid 1px #ccc ;
+}
+
 .game-board {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  height: 300px;
-  width: 300px;
-  margin: 0 auto;
+  height: 400px;
+  width: 400px;
+  margin: 5% auto;
   border: 5px solid black;
 }
 
@@ -13,8 +30,8 @@
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  font-size: 4rem;
-  background: #ccc;
+  font-size: 6rem;
+  background: tan;
   border: 1px solid black;
 }
 
@@ -23,5 +40,5 @@
 }
 
 .green {
-  background: green;
+  background: rgb(76, 214, 76);
 }
