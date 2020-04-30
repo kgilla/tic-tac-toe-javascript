@@ -2,14 +2,20 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  height: 500px;
-  width: 500px;
+  height: 300px;
+  width: 300px;
   margin: 0 auto;
-  border: 1px solid black;
+  border: 5px solid black;
 }
 
 .board-spot {
-  border: 5px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 4rem;
+  background: #ccc;
+  border: 1px solid black;
 }
 
 .red {
