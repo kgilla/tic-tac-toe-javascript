@@ -20,6 +20,7 @@ const gameBoard = (() => {
   function addMove(move) {
     sym = game.currentTurn == 0 ? p1.symbol : p2.symbol;
     gameState[move] = sym;
+    game.checkWin()
     render()
     game.currentTurn = game.turnSwitch(game.currentTurn);
   }
@@ -47,16 +48,27 @@ const game = (() => {
     return turn == 0 ? 1 : 0;
   }
 
-  // function checkWin {
-
-  // }
+  function checkWin() {
+    sym = game.currentTurn == 0 ? p1.symbol : p2.symbol;
+    winCombos.forEach(combo => {
+      let counter = 0;
+      combo.forEach(index => {
+        if (gameBoard.gameState[index] == sym) {
+          counter++;
+          if (counter == 3) {
+            console.log("winner");
+          } 
+        } 
+      });
+    });
+  }
 
   let currentTurn = randomTurn();
 
   const winCombos = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],
   [0,4,8],[2,4,6]];
 
-  return {currentTurn, turnSwitch};
+  return {currentTurn, turnSwitch, checkWin};
 })();
 
 const p1 = Object.create(player("KEN", "X"));
