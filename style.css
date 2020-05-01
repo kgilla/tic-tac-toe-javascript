@@ -5,10 +5,10 @@ body {
 }
 
 .heading {
-  font-size: 2rem;
+  font-size: 3rem;
   font-weight: bold;
   padding: 1%;
-  background: #333;
+  background: linear-gradient(90deg, #5b2c6f, #7d858a, #78281f, #7d6608);
   color: #fff;
   border-bottom: solid 1px #ccc;
 }
@@ -19,8 +19,7 @@ body {
   grid-template-rows: repeat(3, 1fr);
   height: 400px;
   width: 400px;
-  margin: 3% auto;
-  border: 1px solid black;
+  margin: 2% auto;
   background: #eee;
 }
 
@@ -30,7 +29,7 @@ body {
   align-items: center;
   font-weight: bold;
   font-size: 6rem;
-  border: 1px solid black;
+  border: 1px solid #aaa;
 }
 
 #form-box {
@@ -45,9 +44,20 @@ body {
 
 #form-box input {
   width: 380px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
   margin: 1%;
+  padding: 1%;
   font-size: 1.4rem;
+}
 
+#game-start {
+  background: rgb(144, 188, 224);
+}
+
+#game-start:hover {
+  background: rgb(122, 168, 204);
+  border: solid 1px #000;
 }
 
 .p1-win,
@@ -89,10 +99,13 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #eee;
-  border: 1px solid #333;
+  background: #eee;  
   font-size: 2rem;
   padding: 2% 2%
+}
+
+#p1-info {
+  border-right: 1px solid #555;
 }
 
 /* button stuff */
@@ -116,9 +129,14 @@ body {
 
 #new-game:hover,
 #play-again:hover {
-  background: #333;
+  background: #666;
   color: #fff;
   border: 1px solid black;
+}
+
+#game-info {
+  font-size: 1.5rem;
+  padding: 1%;
 }
 
 .show {
@@ -127,4 +145,12 @@ body {
 
 .hidden {
   display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  #p1-info,
+  #p2-info {
+    font-size: 1.5rem;
+    padding: 5% 1%;
+  } 
 }

@@ -42,7 +42,7 @@ const game = (() => {
     gameBoard.clean();
     turnCount = 0;
     gameBoard.addListeners();
-    // currentTurn = randomTurn();
+    gameDisplay.showCurrentTurn();
   }
 
   const randomTurn = () => {
@@ -118,7 +118,6 @@ const gameBoard = (() => {
     game.checkWin(gameState)
     render()
     game.currentTurn = game.turnSwitch();
-    gameDisplay.showCurrentTurn()
   }
 
   function render() {
@@ -134,8 +133,6 @@ const gameBoard = (() => {
       spot.innerHTML = "";
     });
   }
-
-  addListeners();
 
   return {
     boardSpots,
@@ -157,11 +154,12 @@ const gameDisplay = (() => {
   const p2Name = document.getElementById("p2-name");
 
   function showCurrentTurn() {
-    gameInfo.innerHTML = `${game.currentTurn.name}'s Turn`;
+    gameInfo.innerHTML = `${game.currentTurn.name} Goes First!`;
   }
 
   function showGame() {
     nameDisplay();
+    gameBoard.addListeners();
     formBox.classList.toggle("hidden");
     gameBox.classList.toggle("hidden");
   }
