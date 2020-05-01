@@ -19,7 +19,7 @@ body {
   grid-template-rows: repeat(3, 1fr);
   height: 400px;
   width: 400px;
-  margin: 5% auto;
+  margin: 3% auto;
   border: 1px solid black;
   background: #eee;
 }
@@ -34,8 +34,20 @@ body {
 }
 
 #form-box {
-  display: none;
-  border: black solid 1px;
+  position: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  margin: 0 auto;
+  background: white;
+}
+
+#form-box input {
+  width: 380px;
+  margin: 1%;
+  font-size: 1.4rem;
+
 }
 
 .p1-win,
@@ -107,4 +119,12 @@ body {
   background: #333;
   color: #fff;
   border: 1px solid black;
+}
+
+.show {
+  display: block;
+}
+
+.hidden {
+  display: none;
 }

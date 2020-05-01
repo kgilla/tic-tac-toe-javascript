@@ -1,4 +1,5 @@
 const player = (name, symbol) => {
+
   let score = 0;
 
   return {
@@ -8,8 +9,79 @@ const player = (name, symbol) => {
   };
 };
 
-const p1 = Object.create(player("KEN", "X"));
-const p2 = Object.create(player("JULIA", "O"));
+const p1 = Object.create(player("", "X"));
+const p2 = Object.create(player("", "O"));
+
+/* Game Logic */
+
+const game = (() => {
+
+  document.getElementById("new-game").addEventListener("click", newGame);
+
+  const winCombos = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+  ];
+
+  const p = document.getElementById('game-start').addEventListener("click", nameChange)
+
+  function nameChange() {
+    input = document.getElementById("form-box");
+    p1.name = input[0].value;
+    p2.name = input[1].value;
+    gameDisplay.showGame();
+  }
+
+  function newGame() {
+    gameBoard.clean();
+    turnCount = 0;
+    gameBoard.addListeners();
+    // currentTurn = randomTurn();
+  }
+
+  const randomTurn = () => {
+    let turn = Math.floor(Math.random() * 2);
+    return turn == 0 ? p1 : p2;
+  }
+
+  function turnSwitch() {
+    turnCount == 9 ? tie() : turnCount++;
+    return currentTurn = currentTurn == p1 ? p2 : p1;
+  }
+
+  function checkWin(gameState) {
+    winCombos.forEach(combo => {
+      let counter = 0;
+      combo.forEach(index => {
+        if (gameState[index] == currentTurn.symbol) {
+          counter++;
+          if (counter == 3) {
+            currentTurn.score++
+            gameDisplay.win(combo);
+          }
+        }
+      });
+    });
+  }
+
+  let turnCount = 1;
+
+  let currentTurn = randomTurn();
+
+  return {
+    currentTurn,
+    turnSwitch,
+    checkWin,
+    newGame,
+    nameChange
+  };
+})();
 
 /* Game Board Logic */
 
@@ -73,80 +145,32 @@ const gameBoard = (() => {
   };
 })();
 
-/* Game Logic */
-
-const game = (() => {
-
-  document.getElementById("new-game").addEventListener("click", newGame);
-
-  const winCombos = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-  ];
-
-  function newGame() {
-    gameBoard.clean();
-    turnCount = 0;
-    gameBoard.addListeners();
-    // currentTurn = randomTurn();
-  }
-
-  const randomTurn = () => {
-    let turn = Math.floor(Math.random() * 2);
-    return turn == 0 ? p1 : p2;
-  }
-
-  function turnSwitch() {
-    turnCount == 9 ? tie() : turnCount++;
-    return currentTurn = currentTurn == p1 ? p2 : p1;
-  }
-
-  function checkWin(gameState) {
-    winCombos.forEach(combo => {
-      let counter = 0;
-      combo.forEach(index => {
-        if (gameState[index] == currentTurn.symbol) {
-          counter++;
-          if (counter == 3) {
-            currentTurn.score++
-            gameDisplay.win(combo);
-          }
-        }
-      });
-    });
-  }
-
-  let turnCount = 1;
-
-  let currentTurn = randomTurn();
-
-  return {
-    currentTurn,
-    turnSwitch,
-    checkWin,
-    newGame
-  };
-})();
-
 /* Game HUD Logic */
 
 const gameDisplay = (() => {
   const gameInfo = document.getElementById("game-info");
   const p1Score = document.getElementById("p1-score");
   const p2Score = document.getElementById("p2-score");
-
+  const gameBox = document.getElementById("game-box");
+  const formBox = document.getElementById("form-box");
+  const p1Name = document.getElementById("p1-name");
+  const p2Name = document.getElementById("p2-name");
 
   function showCurrentTurn() {
     gameInfo.innerHTML = `${game.currentTurn.name}'s Turn`;
   }
 
-  showCurrentTurn();
+  function showGame() {
+    nameDisplay();
+    formBox.classList.toggle("hidden");
+    gameBox.classList.toggle("hidden");
+  }
+
+  function nameDisplay() {
+    p1Name.innerHTML = p1.name;
+    p2Name.innerHTML = p2.name;
+    showCurrentTurn();
+  }
 
   function win(combo) {
     color = game.currentTurn == p1 ? "p1-win" : "p2-win";
@@ -173,6 +197,7 @@ const gameDisplay = (() => {
 
   return {
     win,
-    showCurrentTurn
+    showCurrentTurn, 
+    showGame
   }
 })();

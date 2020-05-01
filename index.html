@@ -20,42 +20,34 @@
     <div class="board-spot"></div>
     <div class="board-spot"></div>
   </div>
-
-  <div id="form-box">
-    <form action="">
-      <input type="text" placeholder="player1 name">
-      <select>
-        <option value="X">X</option>
-        <option value="O">O</option>
-      </select><br>
-      <input type="text" placeholder="player2 name">
-      <select>
-        <option value="X">X</option>
-        <option value="O">O</option>
-      </select><br>
-      <input type="submit" value="Start Game">
+    <form id="form-box">
+      <h2>Enter Your Names</h2>
+      <input type="text" name="p1" placeholder="Player 1">
+      <input type="text" name="p2" placeholder="Player 2">
+      <input type="button" name="submit" value="Start Game" id="game-start">
     </form>
-  </div>
-  <div id="info-box">
-    <h1 id="game-info"></h1>
-  </div>
-  <div id="score-box">
-
-    <h1 id="p1-symbol">X</h1>
-    <div id="p1-info">
-      <h2 id="p1-name">Kenneth</h2>
-      <h2 id="p1-score">0</h2>
+  <div id="game-box" class="hidden">
+    <div id="info-box">
+      <h1 id="game-info"></h1>
     </div>
-    <div id="p2-info">
-      <h2 id="p2-score">0</h2>
-      <h2 id="p2-name">Julia</h2>
+    <div id="score-box">
+  
+      <h1 id="p1-symbol">X</h1>
+      <div id="p1-info">
+        <h2 id="p1-name">Kenneth</h2>
+        <h2 id="p1-score">0</h2>
+      </div>
+      <div id="p2-info">
+        <h2 id="p2-score">0</h2>
+        <h2 id="p2-name">Julia</h2>
+      </div>
+      <h1 id="p2-symbol">O</h1>
     </div>
-    <h1 id="p2-symbol">O</h1>
-  </div>
-
-  <div id="button-box">
-    <button id="play-again">Play Again?</button>
-    <button id="new-game">New Game</button>
+  
+    <div id="button-box">
+      <button id="play-again">Play Again?</button>
+      <button id="new-game">New Game</button>
+    </div>
   </div>
   <script src="script.js"></script>
 </body>
